@@ -1,0 +1,100 @@
+import { useState } from "react";
+import styled from "styled-components";
+import { SignIn } from "./SignIn";
+import { SignUp } from "./SignUp";
+
+export function Launch () {
+    const [slide, setSlide] = useState(true);
+
+    return (
+        <Wrapper>
+            <SlipContainer slide = {slide}/>
+
+            <Button 
+                onClick={() => setSlide(!slide)}
+                slide = {slide}
+            >
+               {slide ? 'Sign up' : 'Sign in'}
+            </Button>
+
+            <SignIn slide = {slide}/>
+            <SignUp slide = {slide}/>
+
+            <a onClick={() => setSlide(!slide)}>
+                {slide ? 
+                    "Don't have an account yet? Sign up from here!" : 
+                    'Already have an account? Sign in from here!'
+                }
+            </a>
+        </Wrapper>
+    )
+}
+
+type slidePops = {
+    slide: boolean
+}
+
+const Wrapper = styled.div`
+    width: 100 vw;
+    height: 100vh;
+    display: flex;
+    font-family: 'Raleway', sans-serif;
+    
+    background-image: url('https://picstatio.com/large/29e592/fern-leaves-tree.jpg');
+    background-position: center;
+    background-size: cover;
+
+    a {
+        width: 100vw;
+        text-align: center;
+        font-size: 14px;
+        color: #FFF;
+        cursor: pointer;
+
+        position: fixed;
+        bottom: 40px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        @media (min-width: 600px) {
+            display: none;
+        }
+    }
+
+`;
+
+const SlipContainer = styled.div<slidePops>`
+    width: 50vw;
+    height: 100vh;
+    background-color: rgba(12, 12, 12, .8);
+    transition: all 0.4s;
+
+    position: fixed;
+    right: ${props => props.slide ? '50%' : '0'};
+
+
+    @media (max-width: 600px) {
+        width: 100vw;
+        right: 0;
+    }
+`;
+const Button = styled.button<slidePops>`
+    width: 130px;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #F5FAD1;
+    border: none;
+    transition: all 0.4s;
+    background-image: linear-gradient( to right, #083316, #76C352);
+    cursor: pointer;    
+
+    position: fixed;
+    ${props => props.slide ? 'left: 50%' : 'right:50%'};
+
+    @media (max-width: 600px) {
+        display: none;   
+    }
+`;
