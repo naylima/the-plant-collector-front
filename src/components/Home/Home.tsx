@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { Header } from "../Header/Header";
+import { Navbar } from "../Navbar/Navbar";
 
 export function Home () {
     return (
         <>
-            <Header />
+            <Navbar />
         </>
     )
 }
