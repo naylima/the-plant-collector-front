@@ -48,7 +48,6 @@ strong {
 	font-weight: bold;
 }
 * {
-    box-sizing: border-box;
     text-decoration: none;
     outline: none;
 }

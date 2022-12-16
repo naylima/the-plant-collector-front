@@ -1,12 +1,24 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 export function Landing () {
     const navigate = useNavigate();
 
     return (
-        <Wrapper>        
-            <h1>The Plant Collector</h1>        
+        <Wrapper>   
+            <motion.div
+            className="box"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+            duration: 2,
+            delay: 0.5,
+            ease: [0, 0.71, 0.2, 1.01]
+            }}
+            >
+                <h1>The Plant Collector</h1>
+            </motion.div>          
             <a onClick={()=> navigate("/launch")}>get started</a>
         </Wrapper>
     )

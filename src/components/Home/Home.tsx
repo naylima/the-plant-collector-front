@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { Navbar } from "../Navbar/Navbar";
+import { Slider } from "./Slider";
 
 export function Home () {
     return (
         <>
             <Navbar />
+            <Slider />
         </>
     )
 }

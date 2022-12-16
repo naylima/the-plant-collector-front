@@ -5,21 +5,23 @@ import { TfiSearch } from 'react-icons/tfi';
 export function Navbar () {
     return (
         <Wrapper>
-            <div className="logo">
-                <h1>The Plant Collector</h1>
-            </div>
-            <div>
-                <p>Home</p>
-                <RxDotFilled />
-                <p>Categories</p>
-                <RxDotFilled />
-                <p>News</p>
-            </div>
-            <div>
-                <TfiSearch className="icon"/>
-                <RxPerson className="icon"/>
-                <RxHamburgerMenu className="icon"/>
-            </div>
+            <Container>
+                <div className="logo">
+                    <h1>The Plant Collector</h1>
+                </div>
+                <div>
+                    <p>Home</p>
+                    <RxDotFilled />
+                    <p>Categories</p>
+                    <RxDotFilled />
+                    <p>News</p>
+                </div>
+                <div>
+                    <TfiSearch className="icon"/>
+                    <RxPerson className="icon"/>
+                    <RxHamburgerMenu className="icon"/>
+                </div>
+            </Container>
         </Wrapper>
     )
 }
@@ -29,34 +31,52 @@ const Wrapper = styled.div`
     height: 10vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    z-index: 1;
 
     color: #083316;
     font-family: 'Raleway', sans-serif;
 
     position: fixed;
-    z-index: 1;
+    top: 0;
+`;
 
-    div {
-        width: 25vw;
+const Container = styled.div`
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div { 
+        width: 30vw;       
         gap: 10px;
         display: flex;
         align-items: center;
+    }
+
+    div:nth-child(2) {
         justify-content: center;
     }
 
+    div:nth-child(3) {
+        justify-content: flex-end;
+    }
+
     h1 {
-        text-transform: uppercase;
         letter-spacing: 1.8px;
-        font-size: 20px;
+        font-size: 2em;
+        font-weight: 900;
+        color: transparent;
+        background-image:url(https://outforia.com/wp-content/uploads/2022/01/shutterstock_1701764590.jpg);
+        background-size:contain;
+        background-clip: text;
+        -webkit-background-clip: text;
     }
 
     .icon, h1, p {
         cursor: pointer;
         :hover {
-            color: #189E1E;
+            opacity: .8;
         }
     }
-
-
 `;
