@@ -1,23 +1,23 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { GrFacebookOption, GrGooglePlus, GrTwitter } from 'react-icons/gr';
 
 export function SignIn ({ slide } : {slide: boolean}) {
-    return (
-        <Wrapper slide = {slide}>
-            <h1>Sign in</h1>
-            <form>
-                <input type="email" name="email" placeholder=' E-mail' required />
-                <input type="password" name="password" placeholder=' Password' required />
-                <span>forgot password?</span>               
-                <button>Sign in</button>
-            </form>
-            <Icons>
-                <button><GrFacebookOption /></button>
-                <button><GrGooglePlus /></button>
-                <button><GrTwitter /></button>
-            </Icons>
-        </Wrapper>
-    )
+  return (
+    <Wrapper slide = {slide}>
+      <h1>Sign in</h1>
+      <form>
+        <input type="email" name="email" placeholder=' E-mail' required />
+        <input type="password" name="password" placeholder=' Password' required />
+        <span>forgot password?</span>               
+        <button>Sign in</button>
+      </form>
+      <Icons>
+        <button><GrFacebookOption /></button>
+        <button><GrGooglePlus /></button>
+        <button><GrTwitter /></button>
+      </Icons>
+    </Wrapper>
+  );
 }
 
 type slidePops = {

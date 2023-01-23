@@ -9,6 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.1.0",
+    "@radix-ui/react-icons": "^1.1.1",
+    "@radix-ui/react-menubar": "^1.0.0",
+    "@radix-ui/react-navigation-menu": "^1.1.1",
     "framer-motion": "^7.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -20,7 +24,12 @@
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
     "@vitejs/plugin-react": "^2.2.0",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-react": "^7.32.1",
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
   }

@@ -1,36 +1,36 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { SignIn } from "./SignIn";
-import { SignUp } from "./SignUp";
+import { useState } from 'react';
+import styled from 'styled-components';
+import { SignIn } from './SignIn';
+import { SignUp } from './SignUp';
 
 export function Launch () {
-    const [slide, setSlide] = useState(true);
+  const [slide, setSlide] = useState(true);
 
-    return (
-        <Wrapper>
-            <SlipContainer slide = {slide}/>
+  return (
+    <Wrapper>
+      <SlipContainer slide = {slide}/>
 
-            <Button 
-                onClick={() => setSlide(!slide)}
-                slide = {slide}
-            >
-               {slide ? 'Sign up' : 'Sign in'}
-            </Button>
+      <Button 
+        onClick={() => setSlide(!slide)}
+        slide = {slide}
+      >
+        {slide ? 'Sign up' : 'Sign in'}
+      </Button>
 
-            <SignIn slide = {slide}/>
-            <SignUp slide = {slide}/>
+      <SignIn slide = {slide}/>
+      <SignUp slide = {slide}/>
 
-            <a onClick={() => setSlide(!slide)}>
-                {slide ? 
-                    "Don't have an account yet? Sign up from here!" : 
-                    'Already have an account? Sign in from here!'
-                }
-            </a>
-        </Wrapper>
-    )
+      <a onClick={() => setSlide(!slide)}>
+        {slide ? 
+          'Don\'t have an account yet? Sign up from here!' : 
+          'Already have an account? Sign in from here!'
+        }
+      </a>
+    </Wrapper>
+  );
 }
 
-type slidePops = {
+type slideProps = {
     slide: boolean
 }
 
@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 
 `;
 
-const SlipContainer = styled.div<slidePops>`
+const SlipContainer = styled.div<slideProps>`
     width: 50vw;
     height: 100vh;
     background-color: rgba(12, 12, 12, .8);
@@ -80,7 +80,7 @@ const SlipContainer = styled.div<slidePops>`
         right: 0;
     }
 `;
-const Button = styled.button<slidePops>`
+const Button = styled.button<slideProps>`
     width: 130px;
     height: 50px;
     font-size: 14px;

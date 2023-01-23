@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {  Landing, Launch, Home } from "./components";
+import React, { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {  Landing, Launch, Home } from './components';
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
         <Route path='/home' element={<Home/>} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -50,5 +50,6 @@ strong {
 * {
     text-decoration: none;
     outline: none;
+		box-sizing: border-box
 }
 `;
