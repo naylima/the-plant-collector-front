@@ -1,18 +1,42 @@
 import * as Accordion from '@radix-ui/react-accordion';
 import styled, { keyframes } from 'styled-components';
-
 import { BsChevronRight } from 'react-icons/bs';
 
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { listCategories } from '../../services/categoriesApi';
 interface menuProps {
   hidden: boolean,
   setHidden: React.Dispatch<React.SetStateAction<boolean>>
 }
-
 interface Props {
   hidden: boolean
 }
+interface Category {
+  id: string,
+  name: string,
+  type: {
+    id: string,
+    name: string,
+    category_id: string
+  }[]
+}
+
 
 export function HamburgerMenu ({hidden, setHidden}: menuProps) {
+  const navigate = useNavigate(); 
+  const [data, setData] = useState<Category[]>([]); 
+  
+  useEffect(() => {
+    const promise = listCategories();
+    promise.then((res => {
+      setData(res);
+    })).catch(()=>{
+      alert('An error occurred while trying to fetch the data, please refresh the page');
+    });
+  }, []);
+
   return (
     <Container>
       <Background hidden={hidden} onClick={()=> setHidden(true)}/>
@@ -21,27 +45,47 @@ export function HamburgerMenu ({hidden, setHidden}: menuProps) {
 
           <Accordion.Item className="AccordionItem" value="item-1">
             <Accordion.Trigger className="AccordionTrigger">
-              <div>Is it accessible?</div> 
+              <div>New Arrivals</div> 
               <BsChevronRight className="CaretDown" aria-hidden/>
             </Accordion.Trigger>
-            <Accordion.Content className="AccordionContent">Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>
+            <Accordion.Content className="AccordionContent">
+              <ul>
+                <li>New Arrivals in Potted Plants</li>
+                <li>New Arrivals in Airs Plants</li>
+                <li>New Arrivals in Pots & Accessories</li>
+                <li>New Arrivals in Seed Packets</li>
+              </ul>
+            </Accordion.Content>
           </Accordion.Item>
 
-          <Accordion.Item className="AccordionItem" value="item-2">
-            <Accordion.Trigger className="AccordionTrigger">
-              <div>Is it accessible?</div> 
-              <BsChevronRight className="CaretDown" aria-hidden/>
-            </Accordion.Trigger>
-            <Accordion.Content className="AccordionContent">Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>
-          </Accordion.Item>
-
-          <Accordion.Item className="AccordionItem" value="item-3">
-            <Accordion.Trigger className="AccordionTrigger">
-              <div>Is it accessible?</div> 
-              <BsChevronRight className="CaretDown" aria-hidden/>
-            </Accordion.Trigger>
-            <Accordion.Content className="AccordionContent">Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>
-          </Accordion.Item>
+          {
+            data.map((category, index) => (
+              <Accordion.Item key={category.id} className="AccordionItem" value={`item-${index+2}`}>
+                <Accordion.Trigger className="AccordionTrigger">
+                  <div>{category.name}</div> 
+                  <BsChevronRight className="CaretDown" aria-hidden/>
+                </Accordion.Trigger>
+                <Accordion.Content className="AccordionContent">
+                  <ul>
+                    {
+                      category.type.map(type => (
+                        <li 
+                          key={type.id}
+                          onClick={() => {
+                            navigate(`/products/${type.id}`, {state: { name: type.name }}),
+                            setHidden(true);
+                          }}
+                        >
+                          {type.name}
+                        
+                        </li>
+                      ))
+                    }                    
+                  </ul>
+                </Accordion.Content>
+              </Accordion.Item>
+            ))
+          }
 
         </Accordion.Root>
       </Menu>
@@ -82,7 +126,7 @@ const Background = styled.div<Props>`
 `;
 
 const Menu = styled.div<Props>`
-  width: 45vw;
+  width: 60vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -93,7 +137,7 @@ const Menu = styled.div<Props>`
   background-color: #F5FAD1;
 
   position: fixed;
-  left: ${props => props.hidden ? '-45vw' : '0'};
+  left: ${props => props.hidden ? '-60vw' : '0'};
 
   .AccordionItem {
     padding: 10px;
@@ -131,11 +175,11 @@ const Menu = styled.div<Props>`
     margin-top: 5px;
   }
 
-  /* .AccordionContent[data-state='open'] {
+ /*  .AccordionContent[data-state='open'] {
     animation-name: ${slideDown};
     animation-duration: 300ms;
     animation-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
-  } */
+  }  */
   .AccordionContent[data-state='closed'] {
     animation-name: ${slideUp};
     animation-duration: 300ms;

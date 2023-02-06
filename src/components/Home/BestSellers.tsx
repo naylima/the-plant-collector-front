@@ -138,8 +138,8 @@ const Carousel = styled.div`
 `;
 
 const ProductCard = styled.div`
-  width: 175px;
-  height: auto;
+  width: 200px;
+  height: 300px;
   margin: 20px 10px;
   display: flex;
   flex: none;
@@ -155,13 +155,13 @@ const ProductCard = styled.div`
 
   img {
     width: 100%;
-    height: 200px;
+    height: 225px;
     padding: 8px;
     object-fit: cover;
     cursor: pointer;
 
     :hover {
-      filter: brightness(1.2);
+      filter: brightness(1.1);
     }
 
     :active {
@@ -206,6 +206,7 @@ const ProductCard = styled.div`
 
   @media (max-width: 600px) {
     width: 100%;
+    height: auto;
     margin: 20px 0;
 
     img {

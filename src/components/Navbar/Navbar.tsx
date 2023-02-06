@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { TfiSearch } from 'react-icons/tfi';
 import { RxHamburgerMenu } from 'react-icons/rx';
@@ -9,6 +10,7 @@ import { HamburgerMenu } from './HamburgerMenu';
 import { MenuBar } from './MenuBar';
 
 export function Navbar () {
+  const navigate = useNavigate();
   const [hidden, setHidden] = useState(true);
 
   return (
@@ -20,7 +22,9 @@ export function Navbar () {
         </div>
 
         <div className="logo">
-          <h1>The Plant Collector</h1>
+          <h1 onClick={() => navigate('/home')}>
+            The Plant Collector
+          </h1>
         </div> 
 
         <div className='searchBar'>
@@ -99,6 +103,7 @@ const Wrapper = styled.div`
 
 .hamburgerMenu {
   font-size: 22px;
+  margin-right: 10px;
   
   @media (min-width: 850px) {
     display: none;

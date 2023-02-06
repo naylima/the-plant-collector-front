@@ -1,17 +1,81 @@
 import styled from 'styled-components';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { GrFacebookOption, GrGooglePlus, GrTwitter } from 'react-icons/gr';
 
+import { signUp } from '../../services/userApi';
+
 export function SignUp ({ slide } : {slide: boolean}) {
+  const[form, setForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirm_password: ''
+  });
+
+  function handleForm (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  async function sendForm (event: FormEvent) {
+    event.preventDefault();
+
+    if (form.password !== form.confirm_password) {
+      alert('Passwords do not mach!');
+      return;
+    }
+
+    const name = form.name;
+    const email = form.email;
+    const password = form.password;
+    
+    try {
+      await signUp({name, email, password});
+      alert('Your registration has been successfully concluded');
+    } catch (error: any) {
+      alert(`${error.response.data.message}`);
+    }
+  }
+
   return (
     <Wrapper slide = {slide}>
       <h1>Sign up</h1>
-      <form>
-        <input type="name" name="name" placeholder=' Name' required />
-        <input type="email" name="email" placeholder=' E-mail' required />
-        <input type="password" name="password" placeholder=' Password' required />
-        <input type="password" name="confirm_password" placeholder=' Repeat password ' required />
-        <button>Sign up</button>
+      <form onSubmit={sendForm}>
+        <input 
+          type="text"                
+          placeholder="Name"
+          name="name" 
+          value={form.name}               
+          onChange={handleForm}
+          required
+        />
+        <input 
+          type='email' 
+          name='email'
+          placeholder='E-mail'
+          value={form.email}              
+          onChange={handleForm}
+          required 
+        />
+        <input 
+          type='password'
+          name='password'
+          placeholder='Password'
+          value={form.password}          
+          onChange={handleForm}
+          required 
+        />
+        <input 
+          type='password'
+          name='confirm_password'
+          placeholder='Repeat password' 
+          required />
+
+        <button type='submit'>Sign up</button>
       </form>
+      
       <Icons>
         <button><GrFacebookOption /></button>
         <button><GrGooglePlus /></button>

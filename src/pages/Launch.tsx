@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { SignIn } from './SignIn';
-import { SignUp } from './SignUp';
+import { SignIn } from '../components/Launch/SignIn';
+import { SignUp } from '../components/Launch/SignUp';
 
 export function Launch () {
   const [slide, setSlide] = useState(true);

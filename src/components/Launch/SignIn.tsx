@@ -1,15 +1,65 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { GrFacebookOption, GrGooglePlus, GrTwitter } from 'react-icons/gr';
 
+import { signIn } from '../../services/authApi';
+
 export function SignIn ({ slide } : {slide: boolean}) {
+  const navigate = useNavigate();
+    
+  const[form, setForm] = useState({
+    email: '',
+    password: ''
+  });
+    
+  function handleForm (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  async function sendForm(event: FormEvent) {
+    event.preventDefault();
+
+    try {
+      const userData = await signIn(form);
+
+      const name = userData.user.name;    
+      localStorage.setItem('name', name);
+
+      const token = userData.token;
+      localStorage.setItem('plantshop', JSON.stringify({token: token}));
+
+      navigate('/home');
+    } catch (error: any) {
+      alert(`${error.response.data.message}`);
+    }
+  }
+
   return (
     <Wrapper slide = {slide}>
       <h1>Sign in</h1>
-      <form>
-        <input type="email" name="email" placeholder=' E-mail' required />
-        <input type="password" name="password" placeholder=' Password' required />
+      <form onSubmit={sendForm}>
+        <input 
+          type="email" 
+          name="email" 
+          placeholder='E-mail'
+          value={form.email}              
+          onChange={handleForm}
+          required 
+        />
+        <input 
+          type="password" 
+          name="password" 
+          placeholder='Password'
+          value={form.password}          
+          onChange={handleForm}
+          required 
+        />
         <span>forgot password?</span>               
-        <button>Sign in</button>
+        <button type='submit'>Sign in</button>
       </form>
       <Icons>
         <button><GrFacebookOption /></button>

@@ -2,9 +2,33 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import styled, { keyframes } from 'styled-components';
 import './styles.css';
 
-import { RxCaretDown } from 'react-icons/rx';
+import { listCategories } from '../../services/categoriesApi';
 
-export function SubNavBar() { 
+import { RxCaretDown } from 'react-icons/rx';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+interface Category {
+  id: string,
+  name: string,
+  type: {
+    id: string,
+    name: string,
+  }[]
+}
+
+export function SubNavBar() {
+  const navigate = useNavigate(); 
+  const [data, setData] = useState<Category[]>([]); 
+  
+  useEffect(() => {
+    const promise = listCategories();
+    promise.then((res => {
+      setData(res);
+    })).catch(()=>{
+      alert('An error occurred while trying to fetch the data, please refresh the page');
+    });
+  }, []); 
+
   return (
     <Root>
       <List>
@@ -21,87 +45,31 @@ export function SubNavBar() {
             </ul>
           </Content>
         </NavigationMenu.Item>
-
-        <NavigationMenu.Item>
-          <Trigger>
-            All Potted Plants <CaretDown className="CaretDown" aria-hidden />
-          </Trigger>
-          <Content className="NavigationMenuContent">
-            <ul>
-              <li>Pet-Friendly Plants</li>
-              <li>Tropical Indoor Plants</li>
-              <li>Flowering Plants</li>
-              <li>Rare Plants</li>
-              <li>Succulents & Cacti</li>
-              <li>Aquatic Plants</li>
-              <li>Outdoor Plants</li>
-              <li>Vegetable & Herb Plants</li>
-              <li>Dried Plants</li>
-            </ul>
-          </Content>
-        </NavigationMenu.Item>
-
-        <NavigationMenu.Item>
-          <Trigger>
-            Air Plants <CaretDown className="CaretDown" aria-hidden />
-          </Trigger>
-          <Content className="NavigationMenuContent">
-            <ul>
-              <li>Small Air PLants</li>
-              <li>Large Air Plants</li>
-              <li>Air Plants Accessories</li>
-            </ul>
-          </Content>
-        </NavigationMenu.Item>
-
-        <NavigationMenu.Item>
-          <Trigger>
-            Zodiac Houseplants <CaretDown className="CaretDown" aria-hidden />
-          </Trigger>
-          <Content className="NavigationMenuContent">
-            <ul>
-              <li>Capricorn</li>
-              <li>Aquarius</li>
-              <li>Pisces</li>
-              <li>Aries</li>
-              <li>Taurus</li>
-              <li>Gemini</li>
-              <li>Cancer</li>
-              <li>Leo</li>
-              <li>Virgo</li>
-              <li>Libra</li>
-              <li>Scorpio</li>
-              <li>Sagittarius</li>
-            </ul>
-          </Content>
-        </NavigationMenu.Item>
-
-        <NavigationMenu.Item>
-          <Trigger>
-            Pots & Accessories <CaretDown className="CaretDown" aria-hidden />
-          </Trigger>
-          <Content className="NavigationMenuContent">
-            <ul>
-              <li>All Pots & Accessories</li>
-              <li>Pots & Planters</li>
-              <li>Watering Tools</li>
-              <li>Garden Tools</li>
-              <li>Fertilizer & Treatments</li>
-            </ul>
-          </Content>
-        </NavigationMenu.Item>
-
-        <NavigationMenu.Item>
-          <Trigger>
-            Seed Packets <CaretDown className="CaretDown" aria-hidden />
-          </Trigger>
-          <Content className="NavigationMenuContent">
-            <ul>
-              <li>Vegetable & Herb Seeds</li>
-            </ul>
-          </Content>
-        </NavigationMenu.Item>
-
+      
+        { data &&
+          data.map(category => (
+            <NavigationMenu.Item key={category.id}>
+              <Trigger>
+                {category.name}<CaretDown className="CaretDown" aria-hidden />
+              </Trigger>
+              <Content className="NavigationMenuContent">
+                <ul>
+                  {
+                    category.type.map(type => (
+                      <li 
+                        key={type.id} 
+                        onClick={() => navigate(`/products/${type.id}`, {state: { name: type.name }})}
+                      >                        
+                        {type.name}                        
+                      </li>
+                    ))
+                  }                    
+                </ul>
+              </Content>
+            </NavigationMenu.Item>
+          ))
+        }     
+            
         <Indicator>
           <div className="Arrow" />
         </Indicator>
@@ -136,6 +104,7 @@ const fadeOut = keyframes`
 `;
 
 const Root = styled(NavigationMenu.Root)`
+  max-width: 100vw;
   height: 8vh;
   display: flex;
   align-items: center;
@@ -215,6 +184,10 @@ const Content = styled(NavigationMenu.Content)`
   li {
     line-height: 22px;
     cursor: pointer;
+
+    a {
+      color: #FF724C;
+    }
 
     :hover {
       font-weight: 600;

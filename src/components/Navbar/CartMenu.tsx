@@ -1,24 +1,60 @@
 import styled from 'styled-components';
-
 import { BsCart } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../contexts/CartContext';
+import { ProductCart } from '../Products/ProductCart';
 
 export function CartMenu() {
-  return (
-    <Wrapper>
-      <BsCart className='icon'/>
-      <span>You cart is empty :( </span>
-      <p>Browse all things pretty</p>
-      <button>Continue shopping</button>
-    </Wrapper>
-  );
+  const navigate = useNavigate();
+  const { cart } = useCart();
+
+  if (cart && cart.length > 0) {
+    const total = cart.reduce((total: number, product) => 
+      total + (product.amount * product.price), 0);
+
+    return (
+      <Wrapper>
+        <ProductContainer>
+          {
+            cart.map(product => (
+              <ProductCart 
+                key={product.id}
+                product={product}
+              />
+            ))
+          }
+        </ProductContainer>
+
+        <TotalContainer>
+          <div>
+            <h3>Total:</h3>
+            <span>${total/100}</span>
+          </div>
+          <button onClick={() => navigate('/cart')}>CHECKOUT</button>
+        </TotalContainer>
+      </Wrapper>
+    );
+  } else {
+    return (
+      <Wrapper>
+        <BsCart className='icon'/>
+        <h2>You cart is empty :( </h2>
+        <button>Continue shopping</button>
+      </Wrapper>
+    );
+  }
+
 }
 
 const Wrapper = styled.div`
+  width: 300px;
+  max-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: Center;
-  padding: 20px;
+  padding: 10px 0 10px 10px;
+  position: relative;
 
   .icon {
     font-size: 42px;
@@ -26,7 +62,7 @@ const Wrapper = styled.div`
     margin-bottom: 20px;
   }
 
-  span {
+  h2 {
     font-size: 18px;
     line-height: 20px;
     font-weight: 500;
@@ -47,5 +83,27 @@ const Wrapper = styled.div`
     &:hover {
         opacity: .8;
     }
+  }
+`;
+
+const ProductContainer = styled.div`
+  height: 75%;
+  padding-right: 20px;
+  overflow-y: scroll;
+`;
+
+const TotalContainer = styled.div`
+  width: 100%;
+  padding: 20px 20px 10px 0;
+  
+  div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  button {
+    width: 100%;
   }
 `;

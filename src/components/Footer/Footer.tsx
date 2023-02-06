@@ -10,7 +10,7 @@ export function Footer() {
 }
 
 const Wrapper = styled.div`
-  width: 100%;
+  max-width: 100vw;
   height: 40vh;
   display: flex;
   flex-direction: column;
