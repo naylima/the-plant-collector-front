@@ -22,4 +22,10 @@ const Wrapper = styled.div`
   background: #DBF2B9;
   font-family: 'Raleway', sans-serif; 
   color: #FF724C;
+
+  @media (max-width: 850px) {
+    padding-top: 16vh;
+    flex-direction: column;
+    align-items: center;
+  }
 `;

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { ProductCart } from '../components/Products/ProductCart';
-import { addToCart } from '../services/cartApi';
+import { EmptyCart } from '../components/Cart/EmptyCart';
 
 export function Cart() {
   const { cart } = useCart();
@@ -11,21 +12,18 @@ export function Cart() {
   const total = cart?.reduce((total: number, product) => 
     total + (product.amount * product.price), 0);
 
-  async function handleCheckout() {
-    try {
-      {
-        cart?.map(async (product) => {
-          const product_id = product.id;
-          const amount = product.amount;         
-      
-          await addToCart({product_id, amount});                        
-        });
-      }
+  async function handleCheckout() {    
+    localStorage.setItem('cart', JSON.stringify(cart));        
 
-      navigate('/payment');
-    } catch (error) {
-      alert('Something went wrong, please try again!');
-    }  
+    navigate('/payment');   
+  }
+
+  if (cart === null || cart.length === 0) {
+    return (
+      <Wrapper>
+        <EmptyCart />
+      </Wrapper>
+    );
   }
 
   return (

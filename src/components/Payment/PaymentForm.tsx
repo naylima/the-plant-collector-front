@@ -4,6 +4,7 @@ import 'react-credit-cards/es/styles-compiled.css';
 
 import { FocusEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addToCart } from '../../services/cartApi';
 import { makePayment } from '../../services/paymentApi';
 import { useCart } from '../../contexts/CartContext';
 
@@ -41,11 +42,20 @@ export function PaymentForm() {
       cvc: cardCVC      
     };
 
-    const promise = await makePayment(paymentData);
-    promise.then(() => {
+    try {
+      cart?.map(async (product) => {
+        const product_id = product.id;
+        const amount = product.amount;         
+    
+        await addToCart({product_id, amount});                        
+      });
+
+      await makePayment(paymentData);
       setCart([]);
       navigate('/success');
-    });
+    } catch {
+      alert('Something went wrong! Please try again!');
+    }
   }
 
   return (
@@ -112,10 +122,20 @@ const CardBox = styled.div`
   border-radius: 5px;
   background-color: #F5FAD1;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+
+  @media (max-width: 850px) {
+    width: 90%;
+    height: auto;
+  }
 `;
 
 const AlignHor = styled.div`
   display: flex;
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 const AlignInput = styled.div`
@@ -125,6 +145,12 @@ const AlignInput = styled.div`
   margin-left: 24px;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 850px) {
+    width: 100%;
+    margin-left: 0;
+    gap: 10px;
+  }
 `;
 
 const Input = styled.input`
@@ -168,5 +194,9 @@ const Button = styled.button`
   
   &:hover {
       opacity: .8;
+  }
+
+  @media (max-width: 850px) {
+    width: 100%;
   }
 `;

@@ -24,13 +24,15 @@ export function Success() {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 70vh;
+  margin-top: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Raleway', sans-serif; 
   font-weight: 400;
+  background-color: rgba(245,250,209, 0.7);
   
   h1, h2 {
     padding: 8px;

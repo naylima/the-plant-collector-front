@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { BsCart } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
 import { ProductCart } from '../Products/ProductCart';
+import { EmptyCart } from '../Cart/EmptyCart';
 
 export function CartMenu() {
   const navigate = useNavigate();
@@ -37,9 +37,7 @@ export function CartMenu() {
   } else {
     return (
       <Wrapper>
-        <BsCart className='icon'/>
-        <h2>You cart is empty :( </h2>
-        <button>Continue shopping</button>
+        <EmptyCart />
       </Wrapper>
     );
   }
@@ -55,19 +53,6 @@ const Wrapper = styled.div`
   justify-content: Center;
   padding: 10px 0 10px 10px;
   position: relative;
-
-  .icon {
-    font-size: 42px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  h2 {
-    font-size: 18px;
-    line-height: 20px;
-    font-weight: 500;
-    margin-bottom: 10px;
-  }
 
   button {
     height: 30px;

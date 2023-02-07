@@ -28,7 +28,8 @@ const CartContext = createContext<ICart>({
 });
 
 const CartProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [cart, setCart] = useState<ICartItem[]>([]);
+  const products = JSON.parse(localStorage.getItem('cart') || '');
+  const [cart, setCart] = useState<ICartItem[]>(products);
 
   return (
     <CartContext.Provider value={{ cart, setCart }}>
