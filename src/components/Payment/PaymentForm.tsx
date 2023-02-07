@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 
-import { FocusEvent, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../../services/cartApi';
 import { makePayment } from '../../services/paymentApi';
@@ -16,15 +16,10 @@ export function PaymentForm() {
   const [cardName, setCardName] = useState('');
   const [cardDate, setCardDate] = useState('');
   const [cardCVC, setCardCVC] = useState('');
-  const [focus, setFocus] = useState('');
   const [cardIssuer, setCardIssuer] = useState('');
 
   const total = cart?.reduce((total: number, product) => 
     total + (product.amount * product.price), 0) || 0;
-
-  function handleInputFocus(e: FocusEvent<HTMLInputElement, Element>) {
-    setFocus(e.target.id);
-  }
 
   function handleCallback({ issuer } : {issuer: string}) {
     setCardIssuer((issuer).toUpperCase());
@@ -66,7 +61,6 @@ export function PaymentForm() {
             <Cards
               cvc={cardCVC}
               expiry={cardDate}
-              focused={focus}
               name={cardName}
               number={cardNumber}
               callback={handleCallback}
@@ -79,14 +73,12 @@ export function PaymentForm() {
                 maxLength={16}
                 placeholder="Card Number"
                 onChange={(e) => setCardNumber(e.target.value)} value={cardNumber}
-                onFocus={(e) => handleInputFocus(e)}
               />
               <Input
                 type="name"
                 id="name" required
                 placeholder="Name"
                 onChange={(e) => setCardName(e.target.value)} value={cardName}
-                onFocus={(e) => handleInputFocus(e)}
               />
               <AlignItems>
                 <Input
@@ -94,14 +86,14 @@ export function PaymentForm() {
                   id="expiry" required
                   placeholder="Valid Thru"
                   onChange={(e) => setCardDate(e.target.value)} value={cardDate}
-                  onFocus={(e) => handleInputFocus(e)}
+
                 />
                 <Input
                   type="number"
                   id='cvc' required
                   placeholder="CVC"
                   onChange={(e) => setCardCVC(e.target.value)} value={cardCVC}
-                  onFocus={(e) => handleInputFocus(e)}
+
                 />
               </AlignItems>
             </AlignInput>
