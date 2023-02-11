@@ -2,6 +2,8 @@
 
 Front-end for The Plant Collector, an e-commerce.
 
+> Status: Developing 🚧
+
 ## About
 
 The Plant Collector is a web browser application with which you can navigate through products, add to cart and checkout.
