@@ -1,6 +1,6 @@
 # The plant Collector
 
-Front-end for The Plant Collector, an e-commerce.
+Front-end for The Plant Collector, an plant and acssessories e-commerce.
 
 > Status: Developing 🚧
 
