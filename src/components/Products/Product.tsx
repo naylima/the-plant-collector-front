@@ -21,10 +21,8 @@ export function Product({ product }: {product: Product}) {
   const { setCart } = useCart();
 
   const handleAddToCart = (clickedItem: Product) => {
-    setCart(prev => {
-    
+    setCart(prev => {      
       const isItemInCart = prev.find(item => item.id === clickedItem.id); 
-      if (clickedItem.stock === 0) return [...prev];
 
       if (isItemInCart) {
         if (isItemInCart) {
@@ -39,7 +37,7 @@ export function Product({ product }: {product: Product}) {
           }
         };
       };
-    
+      
       return [...prev, {...clickedItem, amount: 1}];
     });
   };

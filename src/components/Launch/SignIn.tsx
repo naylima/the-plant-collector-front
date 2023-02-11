@@ -58,7 +58,7 @@ export function SignIn ({ slide } : {slide: boolean}) {
           onChange={handleForm}
           required 
         />
-        <span>forgot password?</span>               
+                    
         <button type='submit'>Sign in</button>
       </form>
       <Icons>
