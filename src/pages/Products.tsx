@@ -3,13 +3,9 @@ import styled from 'styled-components';
 import { useParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import { Navbar } from '../components/Navbar/Navbar';
-import { SubNavBar } from '../components/SubNavbar/SubNavbar';
-import { Footer } from '../components/Footer/Footer';
 import { Product } from '../components/Products/Product';
 
 import { listProductsByType } from '../services/productsApi';
-
 interface Product {
   id: string,
   name: string,
@@ -40,58 +36,43 @@ export function Products () {
 
   return (
     <>
-      <Navbar />
-      <SubNavBar />
-      <Wrapper>
-        <h1>{name}</h1>
-        {
-          data.length === 0 ?
-            <h2>Coming soon.</h2>
-            :
-            <Container>
-              {
-                data.map(product => (
-                  <Product 
-                    key={product.id}
-                    product={product}
-                  />
-                ))
-              }
-            </Container>
-        }
-        
-      </Wrapper>
-      <Footer />
+      <H1>{name}</H1>
+      {
+        data.length === 0 ?
+          <H2>Coming soon.</H2>
+          :
+          <Container>
+            {
+              data.map(product => (
+                <Product 
+                  key={product.id}
+                  product={product}
+                />
+              ))
+            }
+          </Container>
+      }
     </>
   );
 }
 
-const Wrapper = styled.div`
-  max-width: 100vw;
-  min-height: 55vh;
-  padding-top: 14vh;
-  background: #DBF2B9;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: 'Raleway', sans-serif; 
+const H1 = styled.h1`
+  text-align: center;
+  font-size: 2em;
+  line-height: 3em;
+  font-weight: 500;
   color: #FF724C;
-    
-  h1 {
-    font-size: 2em;
-    line-height: 3em;
-    font-weight: 500;
-  }  
+`;
 
-  h2 {
-    font-size: 18px;
-  }
+const H2 = styled.h2`
+  text-align: center;
+  font-size: 18px;
+  color: #FF724C;
 `;
 
 const Container = styled.div`
   width: 95%;
-  margin-bottom: 10vh;
+  align-self: center;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

@@ -19,6 +19,7 @@
     "axios": "^1.2.4",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
+    "firebase": "^9.17.1",
     "framer-motion": "^7.9.0",
     "react": "^18.2.0",
     "react-credit-cards": "^0.8.3",

@@ -58,7 +58,7 @@ export function SubNavBar() {
                     category.type.map(type => (
                       <li 
                         key={type.id} 
-                        onClick={() => navigate(`/products/${type.id}`, {state: { name: type.name }})}
+                        onClick={() => navigate(`${type.id}`, {state: { name: type.name }})}
                       >                        
                         {type.name}                        
                       </li>

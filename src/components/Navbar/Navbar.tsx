@@ -22,7 +22,7 @@ export function Navbar () {
         </div>
 
         <div className="logo">
-          <h1 onClick={() => navigate('/home')}>
+          <h1 onClick={() => navigate('home')}>
             The Plant Collector
           </h1>
         </div> 

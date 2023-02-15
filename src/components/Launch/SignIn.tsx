@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { GrFacebookOption, GrGooglePlus, GrTwitter } from 'react-icons/gr';
+import { GrGooglePlus } from 'react-icons/gr';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../config/firebase';
 
-import { signIn } from '../../services/authApi';
+import { signIn, authSignIn } from '../../services/authApi';
 
 export function SignIn ({ slide } : {slide: boolean}) {
   const navigate = useNavigate();
@@ -32,10 +34,35 @@ export function SignIn ({ slide } : {slide: boolean}) {
       const token = userData.token;
       localStorage.setItem('plantshop', JSON.stringify({token: token}));
 
-      navigate('/home');
+      navigate('/plantshop/home');
     } catch (error: any) {
       alert(`${error.response.data.message}`);
     }
+  }
+
+  async function authSubmit(name : string, email: string) {
+    try {
+      const userData = await authSignIn({ name, email});
+      
+      const userName = userData.user.name;    
+      localStorage.setItem('name', userName);
+
+      const token = userData.token;
+      localStorage.setItem('plantshop', JSON.stringify({token: token}));
+
+      navigate('/plantshop/home');
+    } catch (error: any) {
+      alert(`${error.response.data.message}`);
+    }
+  }
+
+  async function handleGoogleSignIn() {
+    const provider = new GoogleAuthProvider();
+    const user = await signInWithPopup(auth, provider);
+    const name = user.user.displayName;
+    const email = user.user.email;
+
+    if (email && name) authSubmit(name, email);    
   }
 
   return (
@@ -59,13 +86,9 @@ export function SignIn ({ slide } : {slide: boolean}) {
           required 
         />
                     
-        <button type='submit'>Sign in</button>
+        <Button type='submit'>Sign in</Button>
+        <AuthSignIn onClick={handleGoogleSignIn}>Sign in with <GrGooglePlus /></AuthSignIn>
       </form>
-      <Icons>
-        <button><GrFacebookOption /></button>
-        <button><GrGooglePlus /></button>
-        <button><GrTwitter /></button>
-      </Icons>
     </Wrapper>
   );
 }
@@ -130,39 +153,36 @@ const Wrapper = styled.div<slidePops>`
             opacity: .8;
         }
     }
-
-    button {
-        height: 30px;
-        margin-top: 10px;
-        border-radius: 20px;
-        font-size: 16px;
-        font-weight: 500;
-        border: none;
-        color: #F5FAD1;
-        background-image: linear-gradient( to right, #083316, #76C352);
-        cursor: pointer; 
-        
-        &:hover {
-            opacity: .8;
-        }
-    }
 `;
 
-const Icons = styled.div`
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
+const Button = styled.button`
+  height: 30px;
+  margin-top: 10px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  color: #F5FAD1;
+  background-image: linear-gradient( to right, #083316, #76C352);
+  cursor: pointer; 
+  
+  &:hover {
+      opacity: .8;
+  }
+`;
 
-    button {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        color: #76C352;
-        border: 1px solid #76C352;
-        background: none;
-    }
-    
+const AuthSignIn = styled.button`
+  height: 30px;
+  margin-top: 10px;
+  gap: 10px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #76C352;
+  color: #F5FAD1;
+  background: none;
+  cursor: pointer; 
 `;

@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Page } from './layouts/Page';
 import {  
   Landing, 
   Launch, 
   Home, 
   Products, 
+  ProductPage,
   PrivatePage, 
   Cart, 
   Payment,
@@ -17,8 +19,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/launch' element={<Launch/>} />
-        <Route path='/home' element={<Home/>} />
-        <Route path='/products/:type_id' element={<Products/>} />
+
+        <Route path='/plantshop' element={<Page />}>  
+          <Route path='home' element={<Home/>} />
+          <Route path=':type_id' element={<Products/>} />       
+          <Route path=':type_id/:product_id' element={<ProductPage/>} />    
+        </Route>
+        
         <Route 
           path='/cart'  
           element={

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BsPlusCircle } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
 
 interface Product {
@@ -43,9 +43,16 @@ export function Product({ product }: {product: Product}) {
   };
 
   return (
-    <ProductCard soldOut={product.stock === 0 ? true : false}>
-      <img src={product.image} alt="" />
-      <p>{product.name}</p>
+    <ProductCard 
+      soldOut={product.stock === 0 ? true : false}
+    >
+      <img 
+        src={product.image} alt="" 
+        onClick={() => navigate(`${product.id}`, {state: { product: product }})}
+      />
+      <p onClick={() => navigate(`${product.id}`, {state: { product: product }})}>
+        {product.name}
+      </p>
       <div>
         <span>$ {product.price/100}</span>
         <BsPlusCircle 

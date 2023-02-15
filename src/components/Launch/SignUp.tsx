@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { GrFacebookOption, GrGooglePlus, GrTwitter } from 'react-icons/gr';
 
 import { signUp } from '../../services/userApi';
 
@@ -75,12 +74,6 @@ export function SignUp ({ slide } : {slide: boolean}) {
 
         <button type='submit'>Sign up</button>
       </form>
-      
-      <Icons>
-        <button><GrFacebookOption /></button>
-        <button><GrGooglePlus /></button>
-        <button><GrTwitter /></button>
-      </Icons>
     </Wrapper>
   );
 }
@@ -143,22 +136,4 @@ const Wrapper = styled.div<slidePops>`
         opacity: .8;
     }
   }
-`;
-
-const Icons = styled.div`
-  display: flex;
-  gap: 20px;
-  margin-top: 20px;
-
-  button {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: #76C352;
-    border: 1px solid #76C352;
-    background: none;
-  }    
 `;

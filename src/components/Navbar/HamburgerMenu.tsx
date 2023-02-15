@@ -72,7 +72,7 @@ export function HamburgerMenu ({hidden, setHidden}: menuProps) {
                         <li 
                           key={type.id}
                           onClick={() => {
-                            navigate(`/products/${type.id}`, {state: { name: type.name }}),
+                            navigate(`${type.id}`, {state: { name: type.name }}),
                             setHidden(true);
                           }}
                         >
