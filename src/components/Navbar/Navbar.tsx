@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { TfiSearch } from 'react-icons/tfi';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
 import { HamburgerMenu } from './HamburgerMenu';

@@ -9,7 +9,7 @@ export function EmptyCart() {
     <>
       <Cart className='icon'/>
       <H2>Your cart is empty :( </H2>
-      <Button onClick={() => navigate('/home')}>Continue shopping</Button>
+      <Button onClick={() => navigate('home')}>Continue shopping</Button>
     </>
   );
 }

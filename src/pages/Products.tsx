@@ -57,9 +57,10 @@ export function Products () {
 }
 
 const H1 = styled.h1`
+  margin-top: 35px;
   text-align: center;
   font-size: 2em;
-  line-height: 3em;
+  line-height: 2em;
   font-weight: 500;
   color: #FF724C;
 `;

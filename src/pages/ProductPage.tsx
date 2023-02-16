@@ -27,6 +27,11 @@ const Wrapper = styled.div`
   padding: 20px 60px;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 850px) {
+    padding: 0;
+    flex-direction: column;
+  }
 `;
 
 const Description = styled.div`
@@ -34,6 +39,11 @@ const Description = styled.div`
   padding: 50px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 850px) {
+    width: 100%;
+    padding: 20px;
+  }
 `;
 
 const H1 = styled.h1`
@@ -42,9 +52,14 @@ const H1 = styled.h1`
   font-size: 2em;
   line-height: 2em;
   font-weight: 500;
+
+  @media (max-width: 850px) {
+    line-height: 1;
+  }
 `;
 
 const P = styled.p`
+  margin-top: 20px;
   font-size: 1.2em;
   line-height: 1.2em;
   color: #FF724C;
@@ -73,6 +88,10 @@ const Button = styled.button`
   &:hover {
       opacity: .8;
   }
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
 `;
 
 const Image = styled.div<Image>`
@@ -83,5 +102,11 @@ const Image = styled.div<Image>`
   background-image: url(${props => props.image});
   background-position: center;
   background-size: cover;
+
+  @media (max-width: 850px) {
+    width: 100%;
+    height: 60vh;
+    border-bottom-right-radius: 40%;
+  }
 `;
 

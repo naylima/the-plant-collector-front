@@ -28,8 +28,4 @@ const Container = styled.div`
   flex-direction: column;
   background: #DBF2B9;
   font-family: 'Raleway', sans-serif;
-
-  @media (max-width: 850px) {
-    padding-top: 14vh;
-  }
 `;
