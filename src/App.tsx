@@ -23,7 +23,8 @@ function App() {
         <Route path='/plantshop' element={<Page />}>  
           <Route path='home' element={<Home/>} />
           <Route path=':type_id' element={<Products/>} />       
-          <Route path=':type_id/:product_id' element={<ProductPage/>} />    
+          <Route path=':type_id/:product_id' element={<ProductPage/>} /> 
+          <Route path='product/:product_id' element={<ProductPage/>} />   
         </Route>
         
         <Route 

@@ -9,6 +9,8 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { HamburgerMenu } from './HamburgerMenu';
 import { MenuBar } from './MenuBar';
 
+import { SearchBar } from '../SearchBar/SearchBar';
+
 export function Navbar () {
   const navigate = useNavigate();
   const [hidden, setHidden] = useState(true);
@@ -28,8 +30,7 @@ export function Navbar () {
         </div> 
 
         <div className='searchBar'>
-          <input type='text' name='name' placeholder='What are you looking for?' required />
-          <TfiSearch className="icon" />
+          <SearchBar />
         </div>
 
         <MenuBar />
@@ -37,8 +38,7 @@ export function Navbar () {
       </Container>
 
       <div className='searchBar-mobile'>
-        <input type='text' name='name' placeholder='What are you looking for?' required />
-        <TfiSearch className="icon" />
+        <SearchBar />
       </div>
 
       <HamburgerMenu hidden={hidden} setHidden={setHidden}/> 
@@ -124,10 +124,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  button {
-    all: unset;
-  }
-
   >div { 
     width: 30vw;   
     gap: 10px;
@@ -136,20 +132,6 @@ const Container = styled.div`
 
     @media (max-width: 850px) {
       width: auto;
-    }
-  }
-
-  div:nth-child(3) {
-    justify-content: center;
-    .icon {
-      font-size: 22px;
-    }
-  }
-
-  div:nth-child(4) {
-    justify-content: flex-end;
-    .icon {
-      font-size: 22px;
     }
   }
 

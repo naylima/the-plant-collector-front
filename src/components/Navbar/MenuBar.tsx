@@ -79,6 +79,11 @@ const Root = styled(Menubar.Root)`
   gap: 10px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+
+  button {
+    all: unset;
+  }
 `;
 
 const Trigger = styled(Menubar.Trigger)`
