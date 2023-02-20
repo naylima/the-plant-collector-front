@@ -122,8 +122,7 @@ export function PersonalInformationForm () {
       await postEnrollment(newData);
       alert('Information successfully saved!');
     } catch (err) {
-      console.log(err);
-      alert('Something went wrong! Please try again!');
+      alert('Something went wrong! Check you data and try again!');
     }
   }
 
