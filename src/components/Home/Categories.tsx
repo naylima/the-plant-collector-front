@@ -5,26 +5,34 @@ import outdoor from '../../assets/img/outdoor.jpg';
 import air from '../../assets/img/air.jpg';
 import pots from '../../assets/img/pots.jpg';
 
+import { useNavigate } from 'react-router-dom';
+
 const categories = [
   {
     name: 'Indoor Plants',
-    image: indoor
+    image: indoor,
+    id: '90168b24-4221-44d5-97c1-8e487771f6be'
   },
   {
     name: 'Air Plants',
-    image: air
+    image: air,
+    id: '0f2fa619-e49f-49ed-ac9c-39e035fa21c3'
   },
   {
     name: 'Outdoor Plants',
-    image: outdoor
+    image: outdoor,
+    id: 'b5ea3003-485e-49d2-8944-8e8ecf2508fd'
   },
   {
     name: 'Pots & Accessories',
-    image: pots
+    image: pots,
+    id: '7484eec4-4ec8-460b-b384-6e9fd05f3f06'
   }
 ];
 
 export function Categories() {
+  const navigate = useNavigate();
+  
   return (
     <Wrapper>
       <h1>Browse all things pretty</h1>
@@ -34,6 +42,7 @@ export function Categories() {
             <Category 
               key={category.name}
               image={category.image}
+              onClick={() => navigate(`${category.id}`, {state: { name: category.name }})}
             >
               <h2>{category.name}</h2>
             </Category>

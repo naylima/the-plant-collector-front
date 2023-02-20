@@ -9,3 +9,8 @@ export async function listProducts(keyword: string) {
   const response = await api.get(`/products?keyword=${keyword}`);
   return response.data;
 }
+
+export async function listBestSellers() {
+  const response = await api.get('/products');
+  return response.data;
+}

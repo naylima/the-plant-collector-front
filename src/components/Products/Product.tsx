@@ -9,7 +9,8 @@ interface Product {
   image: string,
   description: string,
   price: number,
-  stock: number
+  stock: number,
+  amount?: number
 };
 
 type soldOutProps = {
@@ -48,9 +49,9 @@ export function Product({ product }: {product: Product}) {
     >
       <img 
         src={product.image} alt="" 
-        onClick={() => navigate(`${product.id}`, {state: { product: product }})}
+        onClick={() => navigate(`/plantshop/product/${product.id}`, {state: { product: product }})}
       />
-      <p onClick={() => navigate(`${product.id}`, {state: { product: product }})}>
+      <p onClick={() => navigate(`/plantshop/product/${product.id}`, {state: { product: product }})}>
         {product.name}
       </p>
       <div>

@@ -7,7 +7,21 @@ import indorplants from '../../assets/img/indorplants.jpg';
 
 
 export function Slider() {
-  const images = [indorplants, plantpots, homedecor];
+  const images = 
+  [
+    {
+      'image': indorplants,
+      'title': 'Find the most beautiful plants'
+    },
+    {
+      'image': plantpots,
+      'title': 'Find all kind pots here'
+    },
+    {
+      'image': homedecor,
+      'title': 'Decor your home'
+    }
+  ];   
 
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef<null | number>(null);
@@ -45,8 +59,11 @@ export function Slider() {
           {images.map((image, idx) => (
             <Slide
               key={idx}
-              image = {image}
+              image = {image.image}
             >
+              <TextBox>
+                <H1>{image.title}</H1>
+              </TextBox>
             </Slide>
           ))}
         </div>
@@ -128,4 +145,22 @@ const Slide = styled.div<slideProps>`
   background-image: url(${props => props.image});
   background-position: center;
   background-size: cover;
+`;
+
+const TextBox = styled.div`
+  padding: 20px;
+  background-color: rgba(12, 12, 12, .5);
+  word-wrap: break-word;
+  position: absolute;
+  bottom: 100px;
+`;
+
+const H1 = styled.h1`
+  font-size: 4vw;
+  font-weight: 700;
+  color:  #FF724C;
+
+  @media (max-width: 850px) {
+    font-size: 6vw;
+  }
 `;

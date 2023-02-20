@@ -20,81 +20,87 @@ export function Launch () {
       <SignIn slide = {slide}/>
       <SignUp slide = {slide}/>
 
-      <a onClick={() => setSlide(!slide)}>
+      <span onClick={() => setSlide(!slide)}>
         {slide ? 
-          'Don\'t have an account yet? Sign up from here!' : 
-          'Already have an account? Sign in from here!'
+          <>
+            Do not have an account yet? Sign up from <a>here</a>!
+          </>
+          : 
+          <>
+            Already have an account? Sign in from <a>here</a>!
+          </>
         }
-      </a>
+      </span>
     </Wrapper>
   );
 }
 
 type slideProps = {
-    slide: boolean
+  slide: boolean
 }
 
 const Wrapper = styled.div`
-    width: 100 vw;
-    height: 100vh;
-    display: flex;
-    font-family: 'Raleway', sans-serif;
-    
-    background-image: url('https://picstatio.com/large/29e592/fern-leaves-tree.jpg');
-    background-position: center;
-    background-size: cover;
+  width: 100 vw;
+  height: 100vh;
+  display: flex;
+  font-family: 'Raleway', sans-serif;
+  
+  background-image: url('https://picstatio.com/large/29e592/fern-leaves-tree.jpg');
+  background-position: center;
+  background-size: cover;
 
-    a {
-        width: 100vw;
-        text-align: center;
-        font-size: 14px;
-        color: #FFF;
-        cursor: pointer;
+  span {
+    width: 100vw;
+    text-align: center;
+    font-size: 14px;
+    color: #FFF;
+    cursor: pointer;
 
-        position: fixed;
-        bottom: 40px;
+    position: fixed;
+    bottom: 40px;
 
-        &:hover {
-            text-decoration: underline;
-        }
-
-        @media (min-width: 600px) {
-            display: none;
-        }
+    @media (min-width: 600px) {
+        display: none;
     }
+  }
+
+  a {
+    text-decoration: underline;
+  }
 
 `;
 
 const SlipContainer = styled.div<slideProps>`
-    width: 50vw;
-    height: 100vh;
-    background-color: rgba(12, 12, 12, .8);
-    transition: all 0.4s;
+  width: 50vw;
+  height: 100vh;
+  background-color: rgba(12, 12, 12, .8);
+  transition: all 0.4s;
 
-    position: fixed;
-    right: ${props => props.slide ? '50%' : '0'};
+  position: fixed;
+  right: ${props => props.slide ? '50%' : '0'};
 
 
-    @media (max-width: 600px) {
-        width: 100vw;
-        right: 0;
-    }
+  @media (max-width: 600px) {
+      width: 100vw;
+      right: 0;
+  }
 `;
+
 const Button = styled.button<slideProps>`
-    width: 130px;
-    height: 50px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #F5FAD1;
-    border: none;
-    transition: all 0.4s;
-    background-image: linear-gradient( to right, #083316, #76C352);
-    cursor: pointer;    
+  width: 130px;
+  height: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #F5FAD1;
+  border: none;
+  transition: all 0.4s;
+  background-image: linear-gradient( to right, #083316, #76C352);
+  cursor: pointer;    
 
-    position: fixed;
-    ${props => props.slide ? 'left: 50%' : 'right:50%'};
+  position: fixed;
+  ${props => props.slide ? 'left: 50%' : 'right:50%'};
 
-    @media (max-width: 600px) {
-        display: none;   
-    }
+  @media (max-width: 600px) {
+      display: none;   
+  }
 `;

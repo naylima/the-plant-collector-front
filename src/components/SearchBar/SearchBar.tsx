@@ -40,7 +40,6 @@ export function SearchBar() {
     const promise = listProducts(keyword);
     promise.then((res => {
       setProducts(res);
-      setHidden(false);
     }));
     promise.catch(() => setProducts([]));
   }, [keyword]);
@@ -61,11 +60,12 @@ export function SearchBar() {
         <Input
           minLength={3}
           debounceTimeout={300}
-          type="text" 
+          type='text'
           placeholder='What are you looking for?'
           value={keyword} 
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
             setKeyword(e.target.value);
+            setHidden(false);
           }}
         />
         
